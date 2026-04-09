@@ -24,10 +24,12 @@ git clone --depth=1 https://github.com/vorxiu/sddm-noctalia.git
 
 ### 2. Install the theme
 
-Move the theme folder to the SDDM themes directory:
+Move the theme files to the SDDM themes directory:
 
 ```sh
-sudo cp -r sddm-noctalia /usr/share/sddm/themes/
+cd sddm-noctalia
+sudo mkdir -vp /usr/share/sddm/themes/sddm-noctalia
+sudo cp -vr Assets *.{qml,desktop,conf} /usr/share/sddm/themes/sddm-noctalia/
 ```
 
 ### 3. Configure SDDM
