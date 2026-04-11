@@ -55,12 +55,13 @@ sudo systemctl restart sddm
 
 ### Sync
 
-Make the background writable by noctalia
+Make the theme and background writable by noctalia
 ```sh
+sudo chmod 666 /usr/share/sddm/themes/sddm-noctalia/theme.conf
 sudo chmod 666 /usr/share/sddm/themes/sddm-noctalia/Assets/background.png
 ```
 
-Add the following noctalia wallpaper hook 
+Add the following noctalia wallpaper hook
 ```sh
 cp "$(qs -c noctalia-shell ipc call wallpaper get '')" /usr/share/sddm/themes/sddm-noctalia/Assets/background.png
 ```
