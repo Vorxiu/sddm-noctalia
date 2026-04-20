@@ -48,7 +48,43 @@ Add or modify the `[Theme]` section:
 Current=sddm-noctalia
 ```
 
-### 4. Restart SDDM
+### 4. (Optional) Enable Wayland for SDDM
+
+By default SDDM runs on X11. To use Niri as the greeter compositor:
+
+```sh
+sudo tee /etc/sddm.conf.d/wayland.conf << 'EOF'
+[General]
+DisplayServer=wayland
+GreeterEnvironment=QT_WAYLAND_SHELL_INTEGRATION=layer-shell
+MinimumVT=1
+
+[Wayland]
+CompositorCommand=niri --session
+EOF
+```
+
+#### Niri hotkey overlay at login
+
+Niri's default config has a hotkey overlay that pops up at startup.
+Its config for the `sddm` user lives at `/var/lib/sddm/.config/niri/config.kdl`.
+
+If the file already exists, uncomment `skip-at-startup`:
+```sh
+sudo sed -i 's,// skip-at-startup,skip-at-startup,g' /var/lib/sddm/.config/niri/config.kdl
+```
+
+Otherwise create a minimal config:
+```sh
+sudo mkdir -p /var/lib/sddm/.config/niri
+sudo -u sddm tee /var/lib/sddm/.config/niri/config.kdl << 'EOF'
+hotkey-overlay {
+      skip-at-startup
+}
+EOF
+```
+
+### 5. Restart SDDM
 
 To apply the changes, restart the display manager:
 
@@ -63,7 +99,7 @@ Make the file writable by noctalia
 sudo chmod 666 /usr/share/sddm/themes/sddm-noctalia/*.conf
 ```
 
-Add the following noctalia wallpaper hook 
+Add the following noctalia wallpaper hook
 ```sh
 sed -i "s|^background=.*|background=$(qs -c noctalia-shell ipc call wallpaper get '')|" /usr/share/sddm/themes/sddm-noctalia/*.conf
 ```
