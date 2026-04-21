@@ -63,9 +63,9 @@ Make the file writable by noctalia
 sudo chmod 666 /usr/share/sddm/themes/sddm-noctalia/*.conf
 ```
 
-Add the following noctalia wallpaper hook 
+Ensure your wallpapers are readable by SDDM
 ```sh
-sed -i "s|^background=.*|background=$(qs -c noctalia-shell ipc call wallpaper get '')|" /usr/share/sddm/themes/sddm-noctalia/*.conf
+chmod 666 ~/path/to/your/wallpaper.png
 ```
 
 Enable user templates in noctalia settings
