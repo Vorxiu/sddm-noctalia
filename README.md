@@ -63,9 +63,9 @@ Make the file writable by noctalia
 sudo chmod 666 /usr/share/sddm/themes/sddm-noctalia/*.conf
 ```
 
-Add the following noctalia wallpaper hook 
+Ensure your wallpapers are readable by SDDM
 ```sh
-sed -i "s|^background=.*|background=$(qs -c noctalia-shell ipc call wallpaper get '')|" /usr/share/sddm/themes/sddm-noctalia/*.conf
+chmod 666 ~/path/to/your/wallpaper.png
 ```
 
 Enable user templates in noctalia settings
@@ -74,7 +74,7 @@ and add to end of
 ```toml
 [templates.sddm-noctalia]
 input_path = "/usr/share/sddm/themes/sddm-noctalia/template.conf"
-output_path = "/usr/share/sddm/themes/sddm-noctalia/theme.conf
+output_path = "/usr/share/sddm/themes/sddm-noctalia/theme.conf"
 ```
 
 _Change the wallpaper atleast once to sync_
@@ -100,7 +100,7 @@ radius=20
 You can test the theme without logging out by running the sddm-greeter in test mode:
 
 ```sh
-sddm-greeter-qt6 --test-mode --theme /usr/share/sddm/themes/noctalia-sddm
+sddm-greeter-qt6 --test-mode --theme /usr/share/sddm/themes/sddm-noctalia
 ```
 
 _Note: If you run into "module is not installed" errors, ensure you are using `sddm-greeter-qt6` and have `qt6-5compat` and `qt6-declarative` installed._
